@@ -119,7 +119,7 @@ function getWave() {
 
 // Main update loop
 function update() {
-  if (paused) return;
+  if (isPaused) return; // Skip update if paused
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   const wave = getWave();
 
