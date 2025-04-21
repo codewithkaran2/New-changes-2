@@ -250,7 +250,7 @@ function update() {
     ctx.fillStyle = 'yellow';
     ctx.fillRect(pu.x, pu.y, pu.width, pu.height);
     ctx.fillStyle = 'white';
-    ctx.font = '25px Arial';
+    ctx.font = '24px Arial';
     ctx.fillText(pu.type, pu.x, pu.y - 5);
   });
 
