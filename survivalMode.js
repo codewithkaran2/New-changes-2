@@ -250,8 +250,10 @@ function update() {
     ctx.fillStyle = 'yellow';
     ctx.fillRect(pu.x, pu.y, pu.width, pu.height);
     ctx.fillStyle = 'white';
-    ctx.font = '24px Arial';
+    ctx.font = '12px Arial';
     ctx.fillText(pu.type, pu.x, pu.y - 5);
+    const tLeft = Math.ceil((5000 - (Date.now() - pu.spawnTime)) / 1000);
+    ctx.fillText(`(${tLeft})`, pu.x + pu.width - 12, pu.y + pu.height + 12);
   });
 
   // Draw player
