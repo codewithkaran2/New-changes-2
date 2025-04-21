@@ -270,7 +270,7 @@ function update() {
   ctx.fillStyle = 'orange'; enemyBullets.forEach(b => ctx.fillRect(b.x, b.y, b.width, b.height));
 
   // UI
-  ctx.fillStyle = 'white'; ctx.font = '25px Arial';
+  ctx.fillStyle = 'white'; ctx.font = '20px Arial';
   ctx.fillText(`Health: ${player.health}`, 10, 30);
   ctx.fillText(`Score: ${player.score}`, 10, 60);
   ctx.fillText(`Wave: ${wave}`, 10, 90);
