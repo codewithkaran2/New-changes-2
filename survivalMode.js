@@ -351,6 +351,10 @@ function survivalStartGame() {
   paused = false;
 
   // Start timers
+  if (!isPaused) {
+    elapsedTime += deltaTime;
+    // Update timer display
+}
   startTime = Date.now();
   enemySpawnInterval = setInterval(spawnEnemy, enemySpawnRate);
   powerUpSpawnInterval = setInterval(spawnPowerUp, powerUpSpawnRate);
