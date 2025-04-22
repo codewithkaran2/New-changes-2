@@ -291,6 +291,7 @@ function showLoseScreen() {
   const title = document.getElementById('gameOverTitle');
   title && (title.innerText = `${playerName} 👎🏻!`);
   document.getElementById('gameOverScreen')?.classList.remove('hidden');
+  submitScoreAndShow(); // Submit score and show leaderboard
 }
 
 function showWinScreen() {
@@ -301,6 +302,7 @@ function showWinScreen() {
   const title = document.getElementById('gameOverTitle');
   title && (title.innerText = `${playerName} 🏆!`);
   document.getElementById('gameOverScreen')?.classList.remove('hidden');
+  submitScoreAndShow(); // Submit score and show leaderboard
 }
 
 function survivalStartGame() {
