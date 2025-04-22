@@ -378,6 +378,65 @@ function playAgain() {
   survivalStartGame();
 }
 
+// Leaderboard integration
+function submitScoreAndShow() {
+  const elapsed = Math.floor((Date.now() - startTime - totalPausedTime) / 1000);
+  fetch('insert_score.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      player_name: playerName,
+      health_remaining: player.health,
+      score: player.score,
+      waves_survived: getWave(),
+      time_survived: elapsed
+    })
+  })
+  .then(res => res.json())
+  .then(() => fetchLeaderboard());
+}
+
+function fetchLeaderboard() {
+  fetch('leaderboard.php')
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.querySelector('#leaderboardTable tbody');
+      tbody.innerHTML = '';
+      data.forEach((row, i) => {
+        const tr = document.createElement('tr');
+        if (
+          row.player_name === playerName &&
+          row.score === player.score &&
+          row.waves_survived === getWave()
+        ) {
+          tr.classList.add('highlight');
+        }
+        tr.innerHTML = `
+          <td>${i+1}</td>
+          <td>${row.player_name}</td>
+          <td>${row.health_remaining}</td>
+          <td>${row.score}</td>
+          <td>${row.waves_survived}</td>
+          <td>${row.time_survived}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+      document.getElementById('leaderboardScreen').classList.remove('hidden');
+    });
+}
+
+function openLeaderboard() {
+  if (gameOverState) {
+    submitScoreAndShow();
+  } else {
+    fetchLeaderboard();
+  }
+}
+
+function closeLeaderboard() {
+  document.getElementById('leaderboardScreen').classList.add('hidden');
+}
+
 // Expose to HTML
 window.survivalStartGame = survivalStartGame;
 window.togglePause       = togglePause;
